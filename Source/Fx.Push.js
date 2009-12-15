@@ -2,7 +2,7 @@ Fx.Push = new Class({
 
   Extends: Fx,
 
-	options: {
+  options: {
     style: true,
     modifiers: { x: 'left', y: 'top' },
     friction: 0,

@@ -1,11 +1,13 @@
 Drag.Flick = new Class({
   Extends: Drag,
 
-  constants: { sampleFrequency: 50 },
+  constants: { 
+    sampleFrequency: 50,
+    sensitivity: 0.3
+  },
 
   initialize: function() {
     this.options.friction = 0.1;
-    this.options.sensitivity = 0.3;
     this.options.bounce = 0;
     
     this.parent.apply(this, arguments);
@@ -52,7 +54,7 @@ Drag.Flick = new Class({
       var dt = this.samples.current.time - this.samples.last.time;
       var dx = this.samples.current.x - this.samples.last.x;
       var dy = this.samples.current.y - this.samples.last.y;
-      var s = this.options.sensitivity;
+      var s = this.constants.sensitivity;
       var rs = 1 - s;
       this.speed.x = this.speed.x * rs + (dx / dt) * s;
       this.speed.y = this.speed.y * rs + (dy / dt) * s;
