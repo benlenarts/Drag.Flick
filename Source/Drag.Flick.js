@@ -1,3 +1,23 @@
+/*
+---
+description: provides the Drag.Flick class which extends Drag by adding momentum to the dragged object.
+
+license: MIT-style
+
+authors:
+- Ben Lenarts
+
+requires:
+  core/1.2.4: '*'
+# actually:
+# - :Fx.Push
+# - core/1.2.4:Drag
+
+provides: [Drag.Flick]
+
+...
+*/
+
 Drag.Flick = new Class({
   Extends: Drag,
 
@@ -27,7 +47,7 @@ Drag.Flick = new Class({
   },
 
   stop: function(event) {
-    function makeObject(prototype) {
+    function inherit(prototype) {
       function F() {};
       F.prototype = prototype;
       return new F();
@@ -39,7 +59,7 @@ Drag.Flick = new Class({
       this.speed.y *= -1;
     }
     if (this.speed.x || this.speed.y) {
-      var options = makeObject(this.options);
+      var options = inherit(this.options);
       options.onComplete = this.fireEvent.bind(this, 'moveEnd');
       this.pusher = new Fx.Push(this.element, options).start(this.speed.x, this.speed.y);
     } else {

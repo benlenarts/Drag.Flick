@@ -1,3 +1,22 @@
+/*
+---
+description: provides the Fx.Push class for a decelerating motion given a start speed.
+
+license: MIT-style
+
+authors:
+- Ben Lenarts
+
+requires:
+  core/1.2.4: '*'
+# actually:
+# - core/1.2.4:[Fx, Element.Style]
+
+provides: [Fx.Push]
+
+...
+*/
+
 Fx.Push = new Class({
 
   Extends: Fx,
