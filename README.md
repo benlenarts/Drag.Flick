@@ -11,8 +11,9 @@ Simply instantiate `Drag.Flick` where you would normally use `Drag`:
 	#JS
 	var myDrag = new Drag.Flick('anElement');
 
-The options available are the same as those available to `Drag`, plus the following:
+This extension adds the following options and events: 
 
   - **friction**: controls how fast the object will decelerate after it's released
   - **bounce**: controls how much the object will 'bounce' off the drag limits after it's released
+  - **onMoveEnd**: Executed when the dragged element comes to a full stop.
 
