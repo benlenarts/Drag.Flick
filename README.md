@@ -1,12 +1,12 @@
 Drag.Flick
 ==========
 
-Drag extension that adds inertia to the movement after the object is released, similar to certain popular touch interfaces. 
+Drag extension that adds momentum to the dragged object: after the object is released it decelerates instead of stopping immediately. This mimics the flick gesture of certain popular touch interfaces. 
 
 How to use
 ----------
 
-Simply use `Drag.Flick` instead of `Drag`:
+Simply instantiate `Drag.Flick` where you would normally use `Drag`:
 
 	#JS
 	var myDrag = new Drag.Flick('anElement');
