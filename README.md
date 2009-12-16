@@ -6,7 +6,7 @@ Drag extension that adds inertia to the movement after the object is released, s
 How to use
 ----------
 
-Simply replace `Drag` by `Drag.Flick`.
+Simply use `Drag.Flick` instead of `Drag`:
 
 	#JS
 	var myDrag = new Drag.Flick('anElement');
