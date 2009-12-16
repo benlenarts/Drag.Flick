@@ -14,6 +14,9 @@ requires:
 
 provides: [Fx.Push]
 
+credits:
+  Q42, for allowing me to release this code as open-source
+
 ...
 */
 
