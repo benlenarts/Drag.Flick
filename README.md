@@ -3,6 +3,8 @@ Drag.Flick
 
 Drag extension that adds momentum to the dragged object: after the object is released it decelerates instead of stopping immediately. This mimics the flick gesture of certain popular touch interfaces. 
 
+Thanks to Drag's versatile design, this can also be used to make elements scroll like butter.
+
 How to use
 ----------
 
