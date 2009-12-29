@@ -1,78 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title>benlenarts/Drag.Flick @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #e3f8ba;
-		  font-family: "Helvetica,Arial,FreeSans"; 
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #1c0745; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #1c0745; }
-    h3 { text-align: center; color: #1c0745; }
-    a { color: #1c0745; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
+<title>Drag.Flick Demo</title>
+<style>
+  body { font-family: Helvetica, Arial, sans-serif; }
+  #limit {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+  }
+  #box {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 150px;
+    padding: 60px 0 60px 0;
+    background: #ccc;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+  }
+</style>
+<script src="core.js"></script>
+<script src="more.js"></script>
+<script src="../Source/Fx.Push.js"></script>
+<script src="../Source/Drag.Flick.js"></script>
+<script>
+document.addEvent('domready', function() {
+  var myDrag = new Drag.Flick('box', {
+    limit: {x: [0,350], y: [0, 350]},
+    bounce: 0.5,
+    onStart: function() {
+      this.element.set('text', 'Dragging');
+    },
+    onComplete: function() {
+      this.element.set('text', 'Sliding');
+    },
+    onMoveEnd: function() {
+      this.element.set('text', 'Drag me!');
+    },
+  });
+});
+</script>
 </head>
 
 <body>
-  <a href="http://github.com/benlenarts/Drag.Flick"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/benlenarts/Drag.Flick/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/benlenarts/Drag.Flick/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+  <h1>Drag.Flick Demo</h1>
+  <div id="limit">
+    <div id="box">
+      Drag me!
     </div>
-      
-    <h1><a href="http://github.com/benlenarts/Drag.Flick">Drag.Flick</a> 
-      <span class="small">by <a href="http://github.com/benlenarts">benlenarts</a></span></h1>
-
-    <div class="description">
-      Touch interface-style drag inertia for MooTools
-    </div>
-
-    <h2>Authors</h2>
-<p>Ben Lenarts <br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/benlenarts/Drag.Flick/zipball/master">zip</a> or
-      <a href="http://github.com/benlenarts/Drag.Flick/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/benlenarts/Drag.Flick</pre>
-    </p>
-      
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/benlenarts/Drag.Flick">benlenarts/Drag.Flick</a>
-    </div>
-    
   </div>
-
-  
 </body>
 </html>
