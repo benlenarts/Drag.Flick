@@ -7,6 +7,8 @@
   body { font-family: Helvetica, Arial, sans-serif; }
   #limit {
     position: relative;
+    float:left;
+    margin-right: 50px;
     width: 500px;
     height: 500px;
     border: 1px solid black;
@@ -22,13 +24,17 @@
     line-height: 30px;
     text-align: center;
   }
+  #demo-code {
+    font-family: Monaco, monospace;
+  }
 </style>
 <script src="core.js"></script>
 <script src="more.js"></script>
 <script src="master/Source/Fx.Push.js"></script>
 <script src="master/Source/Drag.Flick.js"></script>
-<script>
+<script id="demo">
 document.addEvent('domready', function() {
+
   var myDrag = new Drag.Flick('box', {
     limit: {x: [0,350], y: [0, 350]},
     bounce: 0.5,
@@ -42,16 +48,30 @@ document.addEvent('domready', function() {
       this.element.set('text', 'Drag me!');
     },
   });
+
+});
+</script>
+<script>
+document.addEvent('domready', function() {
+  $$('pre#demo-code').set('html', $$('head>script#demo')[0].get('html'));
 });
 </script>
 </head>
 
 <body>
-  <h1>Drag.Flick Demo</h1>
   <div id="limit">
     <div id="box">
       Drag me!
     </div>
   </div>
+  <h1>Drag.Flick Demo</h1>
+  <pre id="demo-code">
+  </pre>
+  <p>
+    See also: <a href="http://mootools.net/docs/more/Drag/Drag">Drag</a>
+  </p>
+  <p>
+    <a href="http://mootools.net/forge/profile/benlenarts">Download Drag.Flick from the Forge</a>
+  </p>
 </body>
 </html>
