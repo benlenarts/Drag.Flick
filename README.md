@@ -5,6 +5,8 @@ Drag extension that adds momentum to the dragged object: after the object is rel
 
 Thanks to Drag's versatile design, this can also be used to make elements scroll like butter.
 
+![Screenshot](http://benlenarts.github.com/Drag.Flick/images/screenshot.png)
+
 How to use
 ----------
 
