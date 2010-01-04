@@ -8,10 +8,8 @@ authors:
 - Ben Lenarts
 
 requires:
-  more/1.2.4.2: '*'
-# actually:
-# - :Fx.Push
-# - more/1.2.4.2:Drag
+- Fx.Push
+- more/1.2.4.2: Drag
 
 provides: [Drag.Flick]
 
