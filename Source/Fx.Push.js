@@ -31,7 +31,7 @@ Fx.Push = new Class({
 	},
 
   initialize: function(element, options) {
-    this.element = this.subject = $(element);
+    this.element = document.id(element);
     this.parent(options);
   },
 
@@ -48,43 +48,47 @@ Fx.Push = new Class({
   },
 
   step: function() {
+    var s = this.speed;
     var time = $time();
+    var isDone = this.options.friction ? (Math.abs(s.x) + Math.abs(s.y)) < 0.001 : (time > this.time + this.options.duration);
 
-    if (this.options.friction) {
-      if ((Math.abs(this.speed.x) + Math.abs(this.speed.y)) < 0.001) { 
-        this.complete();
-        return;
-      }
-    } else if (time > this.time + this.options.duration) {
+    if (isDone) { 
       this.complete();
       return;
-    } 
+    }
 
+    // decelerate
     if (this.options.friction) {
       var multiplier = 1 - this.options.friction;
-      this.speed.x *= multiplier;
-      this.speed.y *= multiplier;
+      s.x *= multiplier;
+      s.y *= multiplier;
     }
 
+    // move
     var interval = time - this.lastStepTime;
-    this.position.x += this.speed.x * interval;
-    this.position.y += this.speed.y * interval;
+    var p = this.position;
+    p.x += this.speed.x * interval;
+    p.y += this.speed.y * interval;
+
+    // bounce?
     if (this.options.limit) {
       var l = this.options.limit;
-      if      (this.position.x < l.x[0]) { this.position.x = l.x[0]; this.speed.x = this.options.bounce * -this.speed.x; }
-      else if (this.position.x > l.x[1]) { this.position.x = l.x[1]; this.speed.x = this.options.bounce * -this.speed.x; }
-      if      (this.position.y < l.y[0]) { this.position.y = l.y[0]; this.speed.y = this.options.bounce * -this.speed.y; }
-      else if (this.position.y > l.y[1]) { this.position.y = l.y[1]; this.speed.y = this.options.bounce * -this.speed.y; }
+      var b = this.options.bounce;
+      if      (p.x < l.x[0]) { p.x = l.x[0]; s.x = b * -s.x; }
+      else if (p.x > l.x[1]) { p.x = l.x[1]; s.x = b * -s.x; }
+      if      (p.y < l.y[0]) { p.y = l.y[0]; s.y = b * -s.y; }
+      else if (p.y > l.y[1]) { p.y = l.y[1]; s.y = b * -s.y; }
     }
+
+    // update DOM
     for (var z in this.options.modifiers){
       var modifier = this.options.modifiers[z];
       if (!modifier) continue;
-      this.element[this.options.style ? 'setStyle' : 'set'](modifier, this.position[z].toInt());
       var value = this.position[z].toInt();
       if (this.options.style) this.element.setStyle(modifier, value);
       else this.element[modifier] = value;
     }
+
     this.lastStepTime = time;
   }
 });
- 
