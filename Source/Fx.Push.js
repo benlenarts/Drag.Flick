@@ -33,12 +33,12 @@ Fx.Push = new Class({
   initialize: function(element, options) {
     this.element = document.id(element);
     this.parent(options);
+    this.position = {};
   },
 
   start: function(sx, sy) {
     var m = this.options.modifiers;
-    this.position = {x: (this.options.style ? this.element.getStyle(m.x) : this.element[m.x]).toInt(),
-                     y: (this.options.style ? this.element.getStyle(m.y) : this.element[m.y]).toInt()};
+    for (z in m) this.position[z] = (this.options.style ? this.element.getStyle(m[z]) : this.element[m[z]]).toInt();
     this.speed = {x: sx, y: sy};
     this.time = 0;
     this.startTimer();
