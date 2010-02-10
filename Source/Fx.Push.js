@@ -37,9 +37,9 @@ Fx.Push = new Class({
   },
 
   start: function(sx, sy) {
-    var m = this.options.modifiers;
-    for (z in m) this.position[z] = (this.options.style ? this.element.getStyle(m[z]) : this.element[m[z]]).toInt();
-    this.speed = {x: sx, y: sy};
+    var m = this.options.modifiers, p = this.position, s = this.options.style;
+    for (d in m) if (m[d]) this.position[d] = (s ? this.element.getStyle(m[d]) : this.element[m[d]]).toInt();
+    this.speed = {x: sx||0, y: sy||0};
     this.time = 0;
     this.startTimer();
     this.onStart();
@@ -48,43 +48,36 @@ Fx.Push = new Class({
   },
 
   step: function() {
-    var s = this.speed;
-    var time = $time();
+    var s = this.speed, time = $time();
     var isDone = this.options.friction ? (Math.abs(s.x) + Math.abs(s.y)) < 0.001 : (time > this.time + this.options.duration);
-
     if (isDone) { 
       this.complete();
       return;
     }
 
     // decelerate
-    if (this.options.friction) {
-      var multiplier = 1 - this.options.friction;
-      s.x *= multiplier;
-      s.y *= multiplier;
-    }
+    var multiplier = 1 - this.options.friction;
+    for (d in s) s[d] *= multiplier;
 
     // move
-    var interval = time - this.lastStepTime;
-    var p = this.position;
-    p.x += this.speed.x * interval;
-    p.y += this.speed.y * interval;
+    var interval = time - this.lastStepTime, p = this.position;
+    for (d in p) p[d] += this.speed[d] * interval;
 
-    // bounce?
+    // limit & bounce
     if (this.options.limit) {
       var l = this.options.limit;
       var b = this.options.bounce;
-      if      (p.x < l.x[0]) { p.x = l.x[0]; s.x = b * -s.x; }
-      else if (p.x > l.x[1]) { p.x = l.x[1]; s.x = b * -s.x; }
-      if      (p.y < l.y[0]) { p.y = l.y[0]; s.y = b * -s.y; }
-      else if (p.y > l.y[1]) { p.y = l.y[1]; s.y = b * -s.y; }
+      for (d in p) {
+        if      (p[d] < l[d][0]) { p[d] = l[d][0]; s[d] = b * -s[d]; }
+        else if (p[d] > l[d][1]) { p[d] = l[d][1]; s[d] = b * -s[d]; }
+      }
     }
 
     // update DOM
-    for (var z in this.options.modifiers){
+    for (var z in p) {
       var modifier = this.options.modifiers[z];
       if (!modifier) continue;
-      var value = this.position[z].toInt();
+      var value = p[z].toInt();
       if (this.options.style) this.element.setStyle(modifier, value);
       else this.element[modifier] = value;
     }
