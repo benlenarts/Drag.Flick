@@ -56,7 +56,7 @@ Drag.Flick = new Class({
     this.parent(event);
     $clear(this.sampleHandle);
     var s = this.speed;
-    if (this.options.invert) { s.x *= -1; s.y *= -1; }
+    if (this.options.invert) for (d in s) s[d] *= -1;
     this.sliding.start(this.speed.x, this.speed.y);
   },
 
@@ -68,8 +68,7 @@ Drag.Flick = new Class({
 
     var s = this.speed, dt = ss.curr.time - ss.prev.time, 
         sens = this.constants.sensitivity, sens1 = 1 - sens;
-    s.x = ((ss.curr.x - ss.prev.x) / dt) * sens + s.x * sens1;
-    s.y = ((ss.curr.y - ss.prev.y) / dt) * sens + s.y * sens1;
+    for (d in s) s[d] = ((ss.curr[d] - ss.prev[d]) / dt) * sens + s[d] * sens1;
   }
 
 });
